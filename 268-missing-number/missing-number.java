@@ -1,29 +1,17 @@
-import java.util.HashSet;
+class Solution 
+{
+    public int missingNumber(int[] nums) 
+    {
+        int n = nums.length;
+        int result = n; // Start with n (because n is the number that is missing in the array)
 
-public class Solution {
-    public int missingNumber(int[] nums) {
-        // Step 1: Find the maximum value in nums
-        int MaxVal = 0;
-        for (int num : nums) {
-            if (num > MaxVal) {
-                MaxVal = num;
+            // XOR all the elements in the array with their indices
+            for (int i = 0; i < n; i++) 
+            {
+                result ^= i ^ nums[i];
             }
-        }
 
-        // Step 2: Store nums in a HashSet for quick lookup
-        HashSet<Integer> numSet = new HashSet<>();
-        for (int num : nums) {
-            numSet.add(num);
-        }
-
-        // Step 3: Find the missing number
-        for (int i = 0; i <= MaxVal; i++) {
-            if (!numSet.contains(i)) { // If a number is missing, return it
-                return i;
-            }
-        }
-
-        // Step 4: If no number is missing, return the next possible number
-        return MaxVal + 1;
+            return result;
     }
+
 }
