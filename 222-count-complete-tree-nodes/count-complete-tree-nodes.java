@@ -17,7 +17,7 @@ class Solution
 {
     public int countNodes(TreeNode root) 
     {
-      // Preorder traversal
+      // Postorder traversal
         // Empty tree
         if (root == null)
         {
