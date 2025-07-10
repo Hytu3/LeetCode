@@ -10,48 +10,45 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        ListNode current = head;
+        ListNode copy = copyList(head);               // Clone the list
+        ListNode reversed = reverseLinkedList(copy);  // Reverse the clone
 
-        // Variable to keep track of array size
-        int size = 0;
+        ListNode current1 = head;
+        ListNode current2 = reversed;
 
-        // If the list is empty, it's technically a palindrome
-        if (current == null) {
-            return true;
-        }
-
-        // Traversing the list to determine the size
-        while (current != null) {
-            size++;
-            current = current.next;
-        }
-
-        int[] array = new int[size]; // Creates an array of the same size as the linked list
-
-        // Reset current to the head of the list so you caan traverse again
-        current = head;
-        int index = 0;
-
-        // Populating the array with values from the linked list
-        while (current != null) {
-            array[index] = current.val;
-            index++;
-            current = current.next;
-        }
-
-        // Checking if the array is a palindrome  starting from left side and a right side
-        int left = 0;
-        int right = array.length - 1;
-
-        // Checking values until they meet at the middle, if they dont match return false if they do return true
-        while (left < right) {
-            if (array[left] != array[right]) {
-                return false; 
+        while (current1 != null && current2 != null) {
+            if (current1.val != current2.val) {
+                return false;
             }
-            left++;
-            right--;
+            current1 = current1.next;
+            current2 = current2.next;
         }
 
-        return true; // All values were matched
+        return true;
+    }
+
+    public ListNode reverseLinkedList(ListNode head) {
+        ListNode prev = null;
+        while (head != null) {
+            ListNode nextTemp = head.next;
+            head.next = prev;
+            prev = head;
+            head = nextTemp;
+        }
+        return prev;
+    }
+
+    public ListNode copyList(ListNode head) {
+        if (head == null) return null;
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+
+        while (head != null) {
+            current.next = new ListNode(head.val);
+            current = current.next;
+            head = head.next;
+        }
+
+        return dummy.next;
     }
 }
