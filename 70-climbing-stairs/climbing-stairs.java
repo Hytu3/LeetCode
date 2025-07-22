@@ -1,22 +1,26 @@
-public class Solution 
-{
-    public int climbStairs(int n) 
-    {
-        if (n <= 2) 
-        {
-            return n; // Base cases: 1 step = 1 way, 2 steps = 2 ways
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public int climbStairs(int n) {
+        List<Integer> list = new ArrayList<>();
+        // Base cases for steps 0 and 1
+        list.add(1);  // 0 steps: 1 way
+        list.add(1);  // 1 step: 1 way
+
+        if (n < 2) {
+            return list.get(n);
         }
 
-        int[] dp = new int[n + 1]; // Create an array to store the results
-        dp[1] = 1; // 1 step: 1 way
-        dp[2] = 2; // 2 steps: 2 ways
-
-        // Fill the dp array for all steps from 3 to n
-        for (int i = 3; i <= n; i++) 
-        {
-            dp[i] = dp[i - 1] + dp[i - 2];
+        // Start building from step 2 up to n
+        for (int i = 2; i <= n; i++) {
+            // Get the last two values we've calculated
+            int prev1 = list.get(i - 1);  // Previous step
+            int prev2 = list.get(i - 2);  // Step before previous
+            int sum = prev1 + prev2;
+            list.add(sum);
         }
 
-        return dp[n]; // Return the result for n steps
+        return list.get(n);
     }
 }
