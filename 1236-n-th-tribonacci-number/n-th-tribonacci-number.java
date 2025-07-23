@@ -9,11 +9,13 @@ class Solution
       {
         array[0] = 0;
       }
+      
       if (n == 1)
       {
         array[0] = 0;
         array[1] = 1;
       }
+      
       if (n >= 2)
       {
         array[0] = 0;
