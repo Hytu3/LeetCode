@@ -11,6 +11,7 @@ class Solution
             int add = numBottles / numExchange;
             sum += add;
             
+            // If theres nothing left to add break the loop
             if (add == 0)
             {
                break;  
