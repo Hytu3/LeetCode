@@ -4,13 +4,22 @@ class Solution
     {
         List<Integer> list = new ArrayList<>(Collections.nCopies(nums.length, 0));
 
-        int carryLimit = nums.length - 1;
+        int carryLimit = nums.length;
         
         for (int i = 0; i < nums.length; i++)
         {
             int newIndex = (i + k) % nums.length;
             
-            list.set(newIndex, nums[i]); 
+            if (newIndex >= carryLimit)
+            {
+                newIndex = newIndex - carryLimit;
+                list.set(newIndex, nums[i]);
+            }
+            
+            if (newIndex < carryLimit)
+            {
+               list.set(newIndex, nums[i]); 
+            }
             
         }
 
