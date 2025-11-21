@@ -10,7 +10,7 @@ class Solution {
                     int sum = nums[i] + nums[j] + nums[k];
                     int diff = Math.abs(target - sum);
 
-                    if (diff < smallestDiff) {
+                    if (diff <= smallestDiff) {
                         smallestDiff = diff;
                         closestSum = sum;
                     }
