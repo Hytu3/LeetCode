@@ -4,28 +4,31 @@ class Solution
     {
         int[] replace = new int[arr.length];
 
-        PriorityQueue <Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        int max = 0;
 
         // Traverse array backwards
         for (int i = arr.length - 1; i >= 0; i--)
         {
             // MaxHeap will be empty only on the first index
-            if (maxHeap.isEmpty())
+            if (max == 0)
             {
                 replace[i] = -1;
 
                 // Throw the initial value into maxHeap
-                maxHeap.offer(arr[i]);
+                max = arr[i];
 
             }
             // Every other case
             else
             {
                 // Get the current max
-                replace[i] = maxHeap.peek();
+                replace[i] = max;
 
-                // Throw the current value into maxHeap
-                maxHeap.offer(arr[i]);
+                // Check for a new max
+                if (arr[i] > max)
+                {
+                    max = arr[i];
+                }
 
             }
         }
