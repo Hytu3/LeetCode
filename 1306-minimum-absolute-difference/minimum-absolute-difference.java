@@ -2,42 +2,54 @@ class Solution
 {
     public List<List<Integer>> minimumAbsDifference(int[] arr) 
     {
-       
-       List<List<Integer>> outerList = new ArrayList<>();
-       
-       // Store all differences
-       List<Integer> diffList = new ArrayList<>();
+        List<List<Integer>> outerList = new ArrayList<>();
 
+        Arrays.sort(arr);
 
-       // Sort the array first
-       Arrays.sort(arr);
+        int min = Integer.MAX_VALUE;
 
-       // Traverse array and find all differences between integers and store them
-       // In diff list
-       
-       for(int i = 1; i < arr.length; i++)
-       {
-         diffList.add(arr[i] - arr[i - 1]);
-       }
+        for (int i = 1; i < arr.length; i++)
+        {
+            int j = i - 1;
 
-       // Find minimum absolute difference
-       
-       Integer minDiff = Collections.min(diffList);
+            int diff = arr[i] - arr[j];
 
-       // Check indeces again and see if they match minimum difference
-       for (int i = 1; i < arr.length; i++)
-       {
-            List<Integer> innerList = new ArrayList<>();
-
-            if (arr[i] - arr[i-1] == minDiff)
+            if (diff <= min)
             {
-                innerList.add(arr[i-1]);
-                innerList.add(arr[i]);
-                outerList.add(innerList);
+                min = diff;
             }
-            
+        }
+
+        for (int i = 1; i < arr.length; i++)
+        {
+            int j = i - 1;
+
+            int diff = arr[i] - arr[j];
+
+            if (diff <= min)
+            {
+                min = diff;
+            }
+        }
+
+        for (int i = 1; i < arr.length; i++)
+        {
+            int j = i - 1;
+
+            List<Integer> list = new ArrayList<>();
+
+            list.add(arr[j]);
+            list.add(arr[i]);
+
+            int diff = arr[i] - arr[j];
+
+            if (diff == min)
+            {
+                outerList.add(list);
+            }
         }
 
         return outerList;
+        
     }
 }
